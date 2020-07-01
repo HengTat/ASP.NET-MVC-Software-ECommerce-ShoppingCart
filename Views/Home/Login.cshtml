@@ -1,0 +1,32 @@
+﻿@model ShoppingCart_9b.Models.User;
+
+<title>
+    Login
+</title>
+
+<table style="margin-left: auto;margin-right: auto;margin-top:10px">
+    <form asp-controller="Home" asp-action="LoginPost">
+        <tr>
+            <td>Username</td>
+            <td><input type="text" name="Username" class="form-control" id="Username" /></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="Password" class="form-control" id="Password" /></td>
+        </tr>
+        @{ 
+            String err = (String) ViewData["Error"];
+            if (err != "")
+            {
+                <tr>
+                    <td>
+                        <span style="color:red"><b>@ViewData["Error"]</b></span>
+                    </td>
+                </tr>
+            }
+        }
+        <tr>
+            <td colspan="2" align="right"><input type="Submit" value="Login" /></td>
+        </tr>
+     </form>
+</table>

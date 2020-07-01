@@ -1,0 +1,187 @@
+﻿@model IEnumerable<ShoppingCart_9b.Models.CartDetails>
+
+@{
+    ViewData["Title"] = "ViewCart";
+    var TotalAmount = ViewData["TotalAmt"];
+}
+<head>
+    <style>
+        .head1 {
+            font-size: 40px;
+            color: #009900;
+            font-weight: bold;
+        }
+
+        .head2 {
+            font-size: 17px;
+            margin-left: 10px;
+            margin-bottom: 15px;
+        }
+
+        body {
+            margin: 0 auto;
+            background-position: center;
+            background-size: contain;
+        }
+
+        .menu {
+            position: sticky;
+            top: 0;
+            background-color: #009901;
+            padding: 5px 25px 10px 25px;
+            color: white;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+            .menu a {
+                float: left;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 20px;
+            }
+
+        .menu-log {
+            right: auto;
+            float: right;
+        }
+
+        .menu-right {
+            float: right;
+        }
+
+        footer {
+            width: 100%;
+            bottom: 0px;
+            background-color: #000;
+            color: #fff;
+            position: absolute;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .body_sec {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<div class=menu>
+    <table>
+        <tr>
+            <td>
+                <h1> View Cart </h1>
+            </td>
+            <td>
+                <a href="~/Products/Index"> Continue Shopping  </a>
+            </td>
+            <td>
+                |
+            </td>
+            <td>
+                <a href="/Cart/Payment" > CheckOut  </a>
+            </td>
+            <td>
+            <div class=menu-log>
+                <h2>Total: $ <span id="total">@TotalAmount</span></h2>
+            </div>
+            </td>
+    </table>
+</div>
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductPic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Price)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id">
+                <td width="20%">
+                    <img src="~/images/@Html.DisplayFor(modelItem => item.Product.ProductPic)" style="max-width:100%" />
+                </td>
+                <td width="10%">
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td width="50%">
+                    @Html.DisplayFor(modelItem => item.Product.Description)
+                </td>
+                <td width="10%">
+                    @Html.DisplayFor(modelItem => item.Product.Price)
+                </td>
+                <td width="10%">
+                    <form>
+                        Quantity :
+                        <input type="number"
+                                value="@item.Qty"
+                                name="quantity"
+                                min="0"
+                                data-id="@item.Id" />
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+</table>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $('input[name=quantity]').change(function (e) {
+            var newQty = e.target.value
+            var cartDetailsId = e.target.dataset.id
+            if (newQty == 0) {
+                $('#' + cartDetailsId).hide();
+            }
+            var jsonData = JSON.stringify({
+                newQty: parseInt(newQty),
+                cartDetailsId: cartDetailsId
+            });
+           console.log(e)
+            $.ajax({
+                type: "POST",
+                url: "/Cart/EditQty",
+                data: { json: jsonData },
+                dataType: "text",
+                success: function (result) {
+                    $('#total').html(result);
+                    window.location.reload();
+                }
+            });
+        });
+    });
+</script>
+
+<!--<footer>
+    <p align="center">
+        <b>Contact Us</b> <br />
+        <br />
+        TheSoftwareCompany@gmail.com<br />
+        Telephone:9999 5555<br />
+        Address:29 Heng Mui Keng Terrance<br />
+    </p>
+
+</footer>
+-->

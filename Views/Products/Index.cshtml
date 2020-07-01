@@ -1,0 +1,141 @@
+﻿@model IEnumerable<ShoppingCart_9b.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Products Gallery</h1>
+
+<div>
+    <form asp-controller="Products" asp-action="Index" id="searchForm">
+        <p>
+            <input type="text" name="searchString" placeholder="Search Products ... " value="@ViewData["searched"]">
+            <input type="submit" value="Search" />
+        </p>
+    </form>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-4" style="padding : 10px">
+            <div style="
+                    border : 1px solid black;
+                    box-shadow: 0px 0px 5px 2px gray;
+                    text-align: center;
+                    height : 100%;
+                    display: flex;
+                    flex-direction: column;
+                    margin : 10px;
+                    padding : 10px;
+                    ">
+                <div class="row">
+                    <div class="col">
+                        <div class="row" style="height : 100px">
+                            <div class="col" style="height : 100%; display : flex">
+                                <img src="~/images/@Html.DisplayFor(modelItem => item.ProductPic)" style="align-self: center; max-height : 100%; max-width : 100%; margin : auto" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>@Html.DisplayFor(modelItem => item.Name)</b>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                $@Html.DisplayFor(modelItem => item.Price)
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                            </div>
+                            <div class="col">
+                                <button onclick="addToCart('@item.Id')">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+
+<!--<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductPic)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td width="20%">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td width="50%">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td width="10%">
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td width="10%">
+                    <img src="~/images/@Html.DisplayFor(modelItem => item.ProductPic)" style="max-width:100%" />
+                </td>
+                <td width="10%">
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <button onclick="addToCart('@item.Id')">Add To Cart</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>-->
+
+<script>
+    function addToCart(productId) {
+        $.ajax({
+            type: "POST",
+            url: "/Products/AddToCart/" + productId,
+            data: {},
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(errorThrown)
+            },
+            success: function (result) {
+                console.log(result)
+                window.location.reload();
+            }
+        });
+    }
+    $(document).ready(function () {
+        $('input[name=searchString]').keyup(function (e) {
+            if (e.target.value == "") {
+                $('#searchForm').submit();
+            }
+        });
+    });
+</script>

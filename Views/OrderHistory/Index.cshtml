@@ -1,0 +1,176 @@
+﻿@model IEnumerable<ShoppingCart_9b.Models.OrderDetails>
+@{
+    ViewData["Title"] = "Index";
+    var sessionId = ViewData["sessionId"];
+}
+<head>
+
+    <style>
+        .head1 {
+            font-size: 40px;
+            color: #009900;
+            font-weight: bold;
+        }
+
+        .head2 {
+            font-size: 17px;
+            margin-left: 10px;
+            margin-bottom: 15px;
+        }
+
+        body {
+            margin: 0 auto;
+            background-position: center;
+            background-size: contain;
+        }
+
+        .menu {
+            position: sticky;
+            top: 0;
+            background-color: #009901;
+            padding: 15px 0px 10px 0px;
+            color: white;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+            .menu a {
+                float: left;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 20px;
+            }
+
+        .menu-log {
+            right: auto;
+            float: right;
+        }
+
+        footer {
+            width: 100%;
+            bottom: 0px;
+            background-color: #000;
+            color: #fff;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .body_sec {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+
+<div class=menu>
+    <table>
+        <tr>
+            <td>
+                <h1> My Purchases </h1>
+            </td>
+            <!--<td>
+                <a href="~/Products/Index"> Home  </a>
+            </td>
+            <td>
+                |
+            </td>
+            <td>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                <script>
+                        function Logout() 
+                        {
+                            alert("You have Logged Out");
+                        }
+                </script>
+            </td> -->
+        </tr>
+    </table>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductPic)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td width="10%">
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td width="50%">
+                    @Html.DisplayFor(modelItem => item.Product.Description)
+                </td>
+                <td width="10%">
+                    @Html.DisplayFor(modelItem => item.Product.Price)
+                </td>
+                <td width="20%">
+                    <img src="~/images/@Html.DisplayFor(modelItem => item.Product.ProductPic)" style="max-width:100%" />
+                </td>
+                <td>
+                    <button type="button" name="download" value="download" onclick="downloadfunction()"> Download </button>
+                    <script>
+                        function downloadfunction() {
+                            alert("Download has started");
+                        }
+                    </script>
+                </td>
+                <td align="left">
+
+                    <!--Product Purchase details-->
+                    Purchased On: @item.Order.Time
+                    <br />
+
+                    Price:$ @item.Product.Price
+                    <br />
+
+                    Quantity : @item.Qty
+                    <br />
+
+                    <form>
+                        ActivationCode:
+                        <select>
+                            @foreach (ActivationCode code in item.ActivationCodes)
+                            {
+                                <option>
+                                    @Html.DisplayFor(modelItem => code.Id)
+                                </option>
+                            }
+                        </select>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<!--<footer>
+    <p align="center">
+        <b>Contact Us</b> <br />
+        <br />
+        TheSoftwareCompany@gmail.com
+        Telephone:9999 5555<br />
+        Address:29 Heng Mui Keng Terrance<br />
+    </p>
+
+</footer>
+-->

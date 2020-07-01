@@ -1,0 +1,172 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+
+<head>
+
+    <style>
+        .head1 {
+            font-size: 40px;
+            color: #009900;
+            font-weight: bold;
+        }
+
+        .head2 {
+            font-size: 17px;
+            margin-left: 10px;
+            margin-bottom: 15px;
+        }
+
+        body {
+            margin: 0 auto;
+            background-position: center;
+            background-size: contain;
+            padding: 35px 0px 10px 0px;
+        }
+
+        .container {
+            background-color: #f2f2f2;
+            padding: 5px 20px 15px 20px;
+        }
+
+        .menu {
+            position: sticky;
+            top: 0;
+            background-color: #009901;
+            padding: 15px 0px 10px 0px;
+            color: white;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+            .menu a {
+                float: left;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 20px;
+            }
+
+        .menu-log {
+            right: auto;
+            float: right;
+        }
+
+        footer {
+            width: 100%;
+            bottom: 0px;
+            background-color: #000;
+            color: #fff;
+            position: absolute;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .body_sec {
+            margin-left: 20px;
+        }
+
+        input[type=text] {
+            width: 80%;
+            margin-bottom: 20px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        label {
+            margin-bottom: 10px;
+            display: block;
+            font-size: 15px;
+        }
+
+        .btn {
+            background-color: #009901;
+            color: white;
+            padding: 12px;
+            margin: 10px 0;
+            width: 100%;
+            font-size: 20px;
+            align-content: center;
+        }
+    </style>
+</head>
+
+<div class="menu">
+    <h1 style="text-align:center;">Credit Card Payment</h1>
+</div>
+
+
+
+<div class="container">
+    <div class="body">
+        <form action="~/Cart/Checkout">
+            <table align="center" width="800">
+                <tr>
+                    <td align="left" style="vertical-align: top;">
+                        <h2>Billing Address</h2>
+                        <label for="FullName">FullName:</label>
+                        <br>
+                        <input type="text" id="FullName" name="FullName" placeholder="John Smith">
+                        <br>
+                        <label for="Email">Email:</label>
+                        <br>
+                        <input type="text" id="Email" name="Email" placeholder="JohnSmith@gmail.com">
+                        <br>
+                        <label for="Address">Address:</label>
+                        <br>
+                        <input type="text" id="Address" name="Address" placeholder="29 Heng Mui Keng Terrance">
+                        <br>
+                        <label for="City">City:</label>
+                        <br>
+                        <input type="text" id="Country" name="Country" placeholder="Singapore">
+                        <br>
+                        <label for="PostalCode">PostalCode:</label>
+                        <br>
+                        <input type="text" id="Postal" name="PostalCode" placeholder="PostalCode">
+                        <br>
+                        <label>
+                            <input type="checkbox" checked="checked" name="sameaddress"> Shipping address same as billing
+                        </label>
+
+                    </td>
+
+
+                    <td align="left" style="vertical-align: top;">
+                        <h2>Payment Details</h2>
+                        <label for="Name on Card">Name on Card:</label>
+                        <br>
+                        <input type="text" id="Name on Card" name="Name on Card" placeholder="John Smith">
+                        <br>
+                        <label for="Credit Card Number">Credit Card Number:</label>
+                        <br>
+                        <input type="text" id="Credit Card Number" name="Credit Card Number" placeholder="1111-1111-1111-1111">
+                        <br>
+                        <label for="ExpiryDate">ExpiryDate:</label>
+                        <br>
+                        <input type="text" id="ExpiryDate" name="ExpiryDate" placeholder="12/11">
+                        <br>
+                        <label for="CVV">CVV:</label>
+                        <br>
+                        <input type="text" id="CVV" name="CVV" placeholder="058">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td td colspan="2" align="center">
+                        <input type="submit" value="Submit" class="btn">
+                    </td>
+                </tr>
+
+        </form>
+</table>
+
